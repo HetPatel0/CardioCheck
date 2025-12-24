@@ -39,7 +39,7 @@ export default function HeroSection() {
           shadow-[0_0_25px_rgba(220,38,38,0.35)]
           animate-glow
           hover:shadow-[0_0_55px_rgba(220,38,38,0.8)]
-          transition-shadow duration-500
+          transition-shadow duration-250
           max-w-full
         "
       >

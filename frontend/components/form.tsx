@@ -2,7 +2,7 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 
-import { Form as ShadForm, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form as ShadForm, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from "@/components/ui/form";
 import {
   Select,
   SelectContent,
@@ -22,6 +22,7 @@ import {
 } from "@tabler/icons-react";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
+import { useRouter } from "next/navigation";
 
 
 const formSchema = z
@@ -98,10 +99,22 @@ export function Form() {
   });
 
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Form submitted");
-  };
+  const router = useRouter();
+async function onSubmit(data: FormData) {
+  try {
+    const res = await fetch("/api/predict", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data),
+});
+
+console.log(res); 
+router.push("/result");
+  } catch (error) {
+    console.error("Prediction error:", error);
+  }
+}
+
   return (
     <div className="shadow-input mx-auto w-full max-w-8/12 rounded-md  mt-0 md:mt-15  p-4 md:rounded-2xl md:p-8 dark:bg-black border border-neutral-200 dark:border-neutral-700">
       <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
@@ -111,10 +124,7 @@ export function Form() {
         Fill in the form , make sure to provide accurate information and we will consider the security of your personal data.
       </p>
       <ShadForm {...form}>
-        <form
-          onSubmit={form.handleSubmit(console.log)}
-          className="mt-8 space-y-8"
-        >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 space-y-6">
           {/* AGE + GENDER */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField
@@ -123,13 +133,14 @@ export function Form() {
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Age</FormLabel>
+                  <FormDescription>Enter your age in years</FormDescription>
                   <FormControl>
                     <Input type="number" placeholder="Years" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
-            />
+              />
 
             <FormField
               control={form.control}
@@ -137,6 +148,7 @@ export function Form() {
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Gender</FormLabel>
+                  <FormDescription> Choose your gender</FormDescription>  
                   <Select onValueChange={(v) => field.onChange(Number(v))}>
                     <FormControl>
                       <SelectTrigger>
@@ -151,7 +163,7 @@ export function Form() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+              />
           </div>
 
           {/* HEIGHT + WEIGHT */}
@@ -162,13 +174,14 @@ export function Form() {
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Height (cm)</FormLabel>
+                  <FormDescription> Enter your height in centimeters</FormDescription>  
                   <FormControl>
                     <Input type="number" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
-            />
+              />
 
             <FormField
               control={form.control}
@@ -176,13 +189,14 @@ export function Form() {
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Weight (kg)</FormLabel>
+                  <FormDescription> Enter your weight in kilograms</FormDescription>  
                   <FormControl>
                     <Input type="number" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
-            />
+              />
           </div>
 
           {/* BLOOD PRESSURE */}
@@ -193,13 +207,15 @@ export function Form() {
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Systolic BP</FormLabel>
+                  <FormDescription> Enter your systolic blood pressure (the higher number on your reading)</FormDescription>  
+                  
                   <FormControl>
                     <Input type="number" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
-            />
+              />
 
             <FormField
               control={form.control}
@@ -207,13 +223,14 @@ export function Form() {
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Diastolic BP</FormLabel>
+                  <FormDescription> Enter your diastolic blood pressure (the lower number on your reading)</FormDescription>  
                   <FormControl>
                     <Input type="number" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
-            />
+              />
           </div>
 
           {/* CHOLESTEROL + GLUCOSE */}
@@ -224,6 +241,7 @@ export function Form() {
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Cholesterol</FormLabel>
+                  <FormDescription> Range of total cholesterol given, select according to your readings </FormDescription>  
                   <Select onValueChange={(v) => field.onChange(Number(v))} defaultValue="1">
                     <FormControl>
                       <SelectTrigger>
@@ -231,15 +249,15 @@ export function Form() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="1">Normal</SelectItem>
-                      <SelectItem value="2">Above Normal</SelectItem>
-                      <SelectItem value="3">High</SelectItem>
+                      <SelectItem value="1">Normal (below 200)</SelectItem>
+                      <SelectItem value="2">Above Normal (200-239)</SelectItem>
+                      <SelectItem value="3">High ( 240 or higher)</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
                 </FormItem>
               )}
-            />
+              />
 
             <FormField
               control={form.control}
@@ -247,6 +265,7 @@ export function Form() {
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Glucose</FormLabel>
+                  <FormDescription> Enter your glucose level according to blood test in mg/dl </FormDescription>  
                   <Select onValueChange={(v) => field.onChange(Number(v))} defaultValue="1">
                     <FormControl>
                       <SelectTrigger>
@@ -254,9 +273,9 @@ export function Form() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="1">Normal</SelectItem>
-                      <SelectItem value="2">Above Normal</SelectItem>
-                      <SelectItem value="3">High</SelectItem>
+                      <SelectItem value="1">Normal (below 100)</SelectItem>
+                      <SelectItem value="2">Above Normal (100-125)</SelectItem>
+                      <SelectItem value="3">High (126 or higher) </SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />

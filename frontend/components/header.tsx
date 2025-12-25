@@ -2,7 +2,6 @@
 import Link from 'next/link'
 import { Logo } from '@/components/logo'
 import { Menu, X } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import React from 'react'
 import { useScroll, motion } from 'motion/react'
 import { cn } from '@/lib/utils'
@@ -11,7 +10,7 @@ import { ModeToggle } from './mode-toogle'
 const menuItems = [
     { name: 'form', href: '/form' },
     { name: 'result', href: '/result' },
-    { name: 'github', href: '/github' },
+    { name: 'github', href: 'https://github.com/HetPatel0/CardioCheck' },
     { name: 'about', href: '/about' },
    
 ]
@@ -61,6 +60,7 @@ export const HeroHeader = () => {
                                         <li key={index}>
                                             <Link
                                                 href={item.href}
+                                                target={item.href.startsWith('https') ? '_blank' : '_self'}
                                                 className="text-muted-foreground hover:text-accent-foreground block duration-150">
                                                 <span>{item.name}</span>
                                             </Link>

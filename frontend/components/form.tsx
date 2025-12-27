@@ -116,7 +116,7 @@ router.push("/result");
 }
 
   return (
-    <div className="shadow-input mx-auto w-full max-w-8/12 rounded-md  mt-0 md:mt-15  p-4 md:rounded-2xl md:p-8 dark:bg-black border border-neutral-200 dark:border-neutral-700">
+    <div className="shadow-input mx-auto w-full  md:max-w-8/12 rounded-md  mt-0 md:mt-15  p-4 md:rounded-2xl md:p-8 dark:bg-black border border-neutral-200 dark:border-neutral-700">
       <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
         Info Form
       </h2>

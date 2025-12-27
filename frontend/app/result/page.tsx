@@ -18,9 +18,8 @@ export default async function CardioResult() {
 
   const isSafe = result.prediction === 0;
 
-  const risk = isSafe
-    ? (result.probability_no_disease * 100).toFixed(1)
-    : (result.probability_disease * 100).toFixed(1);
+  const risk = (result.probability_disease * 100).toFixed(1);
+
 
   const ui = {
     title: isSafe ? "Low Cardiac Risk" : "High Cardiac Risk",

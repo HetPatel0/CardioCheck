@@ -5,13 +5,13 @@ import { Menu, X } from 'lucide-react'
 import React from 'react'
 import { useScroll, motion } from 'motion/react'
 import { cn } from '@/lib/utils'
-import { ModeToggle } from './mode-toogle'
+import { ModeToogle } from './mode-toogle'
 
 const menuItems = [
-    { name: 'form', href: '/form' },
-    { name: 'result', href: '/result' },
-    { name: 'github', href: 'https://github.com/HetPatel0/CardioCheck' },
-    { name: 'about', href: '/about' },
+    { name: 'Form', href: '/form' },
+    { name: 'Result', href: '/result' },
+    { name: 'Github', href: 'https://github.com/HetPatel0/CardioCheck' },
+    { name: 'About', href: '/about' },
    
 ]
 
@@ -41,7 +41,7 @@ export const HeroHeader = () => {
                                 href="/"
                                 aria-label="home"
                                 className="flex items-center space-x-2">
-                                <h3 className=' font-sans text-3xl '>
+                                <h3 className=' font-extrabold text-3xl '>
                                     CardioCheck
                                 </h3>
                             </Link>
@@ -85,7 +85,7 @@ export const HeroHeader = () => {
                                 </ul>
                             </div>
                             <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                               <ModeToggle />
+                               <ModeToogle variant={'link'} />
                             </div>
                         </div>
                     </motion.div>

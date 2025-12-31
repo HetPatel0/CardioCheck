@@ -55,7 +55,7 @@ export default async function CardioResult() {
         </section>
 
         {/* Main Risk Card */}
-        <Card className="dark:bg-zinc-950 dark:border-zinc-800">
+        <Card className="bg-card">
           <CardContent className="py-16 text-center space-y-8">
             <p className="text-sm tracking-widest text-muted-foreground">
               ESTIMATED CARDIOVASCULAR RISK
@@ -70,7 +70,7 @@ export default async function CardioResult() {
             </Badge>
 
             <div className="max-w-md mx-auto">
-              <div className="h-2 rounded-full dark:bg-zinc-800 overflow-hidden">
+              <div className="h-2 rounded-full  overflow-hidden">
                 <div
                   className={`h-full transition-all ${ui.barColor}`}
                   style={{ width: `${risk}%` }}
@@ -82,7 +82,7 @@ export default async function CardioResult() {
 
         {/* Insights */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="dark:bg-zinc-950 dark:border-zinc-800">
+          <Card className="bg-card">
             <CardContent className="p-6 space-y-2">
               <p className="text-sm text-muted-foreground">Blood Pressure</p>
               <h3 className={`text-xl font-semibold ${isSafe ? "text-green-400" : "text-red-400"}`}>
@@ -96,7 +96,7 @@ export default async function CardioResult() {
             </CardContent>
           </Card>
 
-          <Card className="dark:bg-zinc-950 dark:border-zinc-800">
+          <Card className="bg-card">
             <CardContent className="p-6 space-y-2">
               <p className="text-sm text-muted-foreground">Cholesterol</p>
               <h3 className={`text-xl font-semibold ${isSafe ? "text-green-400" : "text-red-400"}`}>
@@ -110,7 +110,7 @@ export default async function CardioResult() {
             </CardContent>
           </Card>
 
-          <Card className="dark:bg-zinc-950 dark:border-zinc-800">
+          <Card className="bg-card">
             <CardContent className="p-6 space-y-2">
               <p className="text-sm text-muted-foreground">Lifestyle</p>
               <h3 className={`text-xl font-semibold ${isSafe ? "text-green-400" : "text-yellow-400"}`}>
@@ -126,7 +126,7 @@ export default async function CardioResult() {
         </section>
 
         {/* AI Guidance */}
-        <Card className="dark:bg-zinc-950 dark:border-zinc-800">
+        <Card className="bg-card">
           <CardContent className="p-8 space-y-6">
             <h3 className="text-2xl font-semibold">
               AI-Based Guidance

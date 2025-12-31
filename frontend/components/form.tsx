@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 
 import { Form as ShadForm, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from "@/components/ui/form";
@@ -10,19 +10,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
 import { z } from "zod";
 import { useForm, Resolver } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandOnlyfans,
-} from "@tabler/icons-react";
+
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 import { useRouter } from "next/navigation";
+import { LucideLoader2 } from "lucide-react";
 
 
 const formSchema = z
@@ -100,14 +96,18 @@ export function Form() {
 
 
   const router = useRouter();
+  const [isLoading,setIsLoading] = useState(false);
 async function onSubmit(data: FormData) {
   try {
+    setIsLoading(true)
     const res = await fetch("/api/predict", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(data),
-});
-
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    
+}
+);
+  setIsLoading(false) 
 console.log(res); 
 router.push("/result");
   } catch (error) {
@@ -116,11 +116,11 @@ router.push("/result");
 }
 
   return (
-    <div className="shadow-input mx-auto w-full  md:max-w-8/12 rounded-md  mt-0 md:mt-15  p-4 md:rounded-2xl md:p-8 dark:bg-black border border-neutral-200 dark:border-neutral-700">
-      <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
-        Info Form
+    <div className="shadow-input mx-auto w-full  md:max-w-8/12 rounded-md  mt-0 md:mt-15  p-4 md:rounded-2xl md:p-8  border bg-card">
+      <h2 className="text-3xl font-bold ">
+       Prediction Form
       </h2>
-      <p className="mt-2 max-w-fit  text-sm text-neutral-600 dark:text-neutral-300">
+      <p className="mt-2 max-w-fit  text-sm ">
         Fill in the form , make sure to provide accurate information and we will consider the security of your personal data.
       </p>
       <ShadForm {...form}>
@@ -306,9 +306,10 @@ router.push("/result");
             ))}
           </div>
 
-          {/* SUBMIT */}
           <Button type="submit" className="w-full">
-            Submit
+            {
+              isLoading?<LucideLoader2 className="animate-spin" />:"submit"
+            }
           </Button>
         </form>
       </ShadForm>

@@ -35,9 +35,9 @@ export default function HeroSection() {
             </div>
 
             {/* RIGHT IMAGE */}
-            <div>
+            {/* <div>
               <img src="./heart.png" alt='heart image' width={400} height={400} className='scale-200' />
-            </div>
+            </div> */}
 
           </div>
           <div className='w-full'>

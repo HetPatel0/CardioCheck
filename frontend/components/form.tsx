@@ -19,6 +19,7 @@ import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 import { useRouter } from "next/navigation";
 import { LucideLoader2 } from "lucide-react";
+import { LoaderFive } from "./ui/loader";
 
 
 const formSchema = z
@@ -308,7 +309,7 @@ router.push("/result");
 
           <Button type="submit" className="w-full">
             {
-              isLoading?<LucideLoader2 className="animate-spin" />:"submit"
+              isLoading?<LoaderFive   text="predicting result ..."/>:"submit"
             }
           </Button>
         </form>
